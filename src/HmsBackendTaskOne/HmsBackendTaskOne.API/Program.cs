@@ -7,6 +7,8 @@ using Serilog.Events;
 using System.Reflection;
 using HmsBackendTaskOne.Application;
 using HmsBackendTaskOne.Application.DbContexts;
+using MediatR;
+using HmsBackendTaskOne.Application.Behaviours;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +35,10 @@ try
     builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.UseSqlServer(connectionString,
         m => m.MigrationsAssembly(assemblyName)));
+
+    builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
+    builder.Services.AddSingleton(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
 
     builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
