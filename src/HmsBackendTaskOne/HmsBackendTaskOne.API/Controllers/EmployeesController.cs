@@ -10,17 +10,17 @@ namespace HmsBackendTaskOne.API.Controllers
     [ApiController]
     public class EmployeesController : Controller
     {
-        private readonly IMediator _mediator;
+        private readonly ISender _sender;
 
-        public EmployeesController(IMediator mediator)
+        public EmployeesController(ISender sender)
         {
-            _mediator = mediator;
+            _sender = sender;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetEmployees()
         {
-            var employees = await _mediator.Send(new GetEmployeesQuery());
+            var employees = await _sender.Send(new GetEmployeesQuery());
 
             return Ok(employees);
         }
@@ -28,7 +28,7 @@ namespace HmsBackendTaskOne.API.Controllers
         [HttpGet("{id:Guid}", Name = "GetEmployeeById")]
         public async Task<IActionResult> GetEmployeeById(Guid id)
         {
-            var employee = await _mediator.Send(new GetEmployeeByIdQuery(id));
+            var employee = await _sender.Send(new GetEmployeeByIdQuery(id));
 
             return Ok(employee);
         }
@@ -36,7 +36,7 @@ namespace HmsBackendTaskOne.API.Controllers
         [HttpPost]
         public async Task<ActionResult> AddEmployee([FromBody] Employee product)
         {
-            var productToReturn = await _mediator.Send(new AddEmployeeCommand(product));
+            var productToReturn = await _sender.Send(new AddEmployeeCommand(product));
 
             return CreatedAtRoute("GetEmployeeById", new { id = productToReturn.Id },
                 productToReturn);
@@ -45,7 +45,7 @@ namespace HmsBackendTaskOne.API.Controllers
         [HttpPut]
         public async Task<ActionResult> UpdateEmployee([FromBody] Employee product)
         {
-            var productToReturn = await _mediator.Send(new UpdateEmployeeCommand(product));
+            var productToReturn = await _sender.Send(new UpdateEmployeeCommand(product));
 
             return CreatedAtRoute("GetEmployeeById", new { id = productToReturn.Id },
                 productToReturn);
@@ -54,7 +54,7 @@ namespace HmsBackendTaskOne.API.Controllers
         [HttpDelete("{id:Guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
-            await _mediator.Send(new DeleteEmployeeCommand(id));
+            await _sender.Send(new DeleteEmployeeCommand(id));
             return Ok();
         }
     }
