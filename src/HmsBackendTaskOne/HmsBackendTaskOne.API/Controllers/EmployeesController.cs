@@ -41,5 +41,14 @@ namespace HmsBackendTaskOne.API.Controllers
             return CreatedAtRoute("GetEmployeeById", new { id = productToReturn.Id },
                 productToReturn);
         }
+
+        [HttpPut]
+        public async Task<ActionResult> UpdateEmployee([FromBody] Employee product)
+        {
+            var productToReturn = await _mediator.Send(new UpdateEmployeeCommand(product));
+
+            return CreatedAtRoute("GetEmployeeById", new { id = productToReturn.Id },
+                productToReturn);
+        }
     }
 }

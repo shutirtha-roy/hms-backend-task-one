@@ -51,6 +51,7 @@ try
     builder.Services.AddScoped<IRequestHandler<GetEmployeesQuery, IList<Employee>>, GetEmployeeHandler>();
     builder.Services.AddScoped<IRequestHandler<GetEmployeeByIdQuery, Employee>, GetEmployeeByIdHandler>();
     builder.Services.AddScoped<IRequestHandler<AddEmployeeCommand, Employee>, AddEmployeeHandler>();
+    builder.Services.AddScoped<IRequestHandler<UpdateEmployeeCommand, Employee>, UpdateEmployeeHandler>();
 
     builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
