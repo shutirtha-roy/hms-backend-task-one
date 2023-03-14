@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using HmsBackendTaskOne.Application.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HmsBackendTaskOne.API.Controllers
@@ -14,9 +15,12 @@ namespace HmsBackendTaskOne.API.Controllers
             _mediator = mediator;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> GetEmployees()
         {
-            return View();
+            var employees = await _mediator.Send(new GetEmployeesQuery());
+
+            return Ok(employees);
         }
     }
 }

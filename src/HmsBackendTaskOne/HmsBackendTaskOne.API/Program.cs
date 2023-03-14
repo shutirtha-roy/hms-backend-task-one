@@ -7,8 +7,11 @@ using Serilog.Events;
 using System.Reflection;
 using HmsBackendTaskOne.Application;
 using HmsBackendTaskOne.Application.DbContexts;
+using Autofac.Core;
 using MediatR;
-using HmsBackendTaskOne.Application.Behaviours;
+using HmsBackendTaskOne.Application.Queries;
+using HmsBackendTaskOne.Application.Handlers;
+using HmsBackendTaskOne.Domain.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,7 +39,15 @@ try
         options.UseSqlServer(connectionString,
         m => m.MigrationsAssembly(assemblyName)));
 
-    builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+    //builder.Services.AddMediatR(conf => conf.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
+    builder.Services.AddMediatR(configuration =>
+    {
+        configuration.Lifetime = ServiceLifetime.Scoped;
+        configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+    });
+
+    builder.Services.AddScoped<IRequestHandler<GetEmployeesQuery, IList<Employee>>, GetProductsHandler>();
 
     builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
