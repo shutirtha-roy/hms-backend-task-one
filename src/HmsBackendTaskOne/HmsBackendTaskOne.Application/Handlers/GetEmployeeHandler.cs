@@ -6,11 +6,11 @@ using MediatR;
 
 namespace HmsBackendTaskOne.Application.Handlers
 {
-    public class GetProductsHandler : IRequestHandler<GetEmployeesQuery, IList<Employee>>
+    public class GetEmployeeHandler : IRequestHandler<GetEmployeesQuery, IList<Employee>>
     {
         private readonly IApplicationUnitOfWork _applicationUnitOfWork;
 
-        public GetProductsHandler(IApplicationUnitOfWork applicationUnitOfWork)
+        public GetEmployeeHandler(IApplicationUnitOfWork applicationUnitOfWork)
         {
             _applicationUnitOfWork = applicationUnitOfWork;
         }

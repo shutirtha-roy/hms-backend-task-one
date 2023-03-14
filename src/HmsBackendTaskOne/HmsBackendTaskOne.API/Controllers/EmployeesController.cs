@@ -22,5 +22,13 @@ namespace HmsBackendTaskOne.API.Controllers
 
             return Ok(employees);
         }
+
+        [HttpGet("{id:Guid}", Name = "GetEmployeeById")]
+        public async Task<IActionResult> GetEmployeeById(Guid id)
+        {
+            var employee = await _mediator.Send(new GetEmployeeByIdQuery(id));
+
+            return Ok(employee);
+        }
     }
 }

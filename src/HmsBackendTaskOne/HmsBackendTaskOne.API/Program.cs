@@ -47,7 +47,8 @@ try
         configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
     });
 
-    builder.Services.AddScoped<IRequestHandler<GetEmployeesQuery, IList<Employee>>, GetProductsHandler>();
+    builder.Services.AddScoped<IRequestHandler<GetEmployeesQuery, IList<Employee>>, GetEmployeeHandler>();
+    builder.Services.AddScoped<IRequestHandler<GetEmployeeByIdQuery, Employee>, GetEmployeeByIdHandler>();
 
     builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
