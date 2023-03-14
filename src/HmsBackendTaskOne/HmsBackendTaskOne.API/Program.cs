@@ -12,6 +12,7 @@ using MediatR;
 using HmsBackendTaskOne.Application.Queries;
 using HmsBackendTaskOne.Application.Handlers;
 using HmsBackendTaskOne.Domain.Entities;
+using HmsBackendTaskOne.Application.Commands;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,6 +50,7 @@ try
 
     builder.Services.AddScoped<IRequestHandler<GetEmployeesQuery, IList<Employee>>, GetEmployeeHandler>();
     builder.Services.AddScoped<IRequestHandler<GetEmployeeByIdQuery, Employee>, GetEmployeeByIdHandler>();
+    builder.Services.AddScoped<IRequestHandler<AddEmployeeCommand, Employee>, AddEmployeeHandler>();
 
     builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

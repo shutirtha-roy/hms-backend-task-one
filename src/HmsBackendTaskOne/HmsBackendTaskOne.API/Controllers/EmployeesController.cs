@@ -1,4 +1,6 @@
-﻿using HmsBackendTaskOne.Application.Queries;
+﻿using HmsBackendTaskOne.Application.Commands;
+using HmsBackendTaskOne.Application.Queries;
+using HmsBackendTaskOne.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,6 +31,15 @@ namespace HmsBackendTaskOne.API.Controllers
             var employee = await _mediator.Send(new GetEmployeeByIdQuery(id));
 
             return Ok(employee);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> AddEmployee([FromBody] Employee product)
+        {
+            var productToReturn = await _mediator.Send(new AddEmployeeCommand(product));
+
+            return CreatedAtRoute("GetEmployeeById", new { id = productToReturn.Id },
+                productToReturn);
         }
     }
 }
