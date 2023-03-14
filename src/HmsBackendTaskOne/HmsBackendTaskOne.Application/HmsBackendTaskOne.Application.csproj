@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HmsBackendTaskOne.Domain\HmsBackendTaskOne.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

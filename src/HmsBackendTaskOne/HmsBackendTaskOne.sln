@@ -5,6 +5,10 @@ VisualStudioVersion = 17.4.33403.182
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HmsBackendTaskOne.API", "HmsBackendTaskOne.API\HmsBackendTaskOne.API.csproj", "{B5671321-7F9E-4B75-955E-0D854CBA15F3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HmsBackendTaskOne.Application", "HmsBackendTaskOne.Application\HmsBackendTaskOne.Application.csproj", "{616998B6-FA10-4A0B-9A5F-868D5E2FAA1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HmsBackendTaskOne.Domain", "HmsBackendTaskOne.Domain\HmsBackendTaskOne.Domain.csproj", "{0D33076E-2F24-494C-B071-300623221F4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{B5671321-7F9E-4B75-955E-0D854CBA15F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5671321-7F9E-4B75-955E-0D854CBA15F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5671321-7F9E-4B75-955E-0D854CBA15F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{616998B6-FA10-4A0B-9A5F-868D5E2FAA1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{616998B6-FA10-4A0B-9A5F-868D5E2FAA1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{616998B6-FA10-4A0B-9A5F-868D5E2FAA1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{616998B6-FA10-4A0B-9A5F-868D5E2FAA1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D33076E-2F24-494C-B071-300623221F4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D33076E-2F24-494C-B071-300623221F4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D33076E-2F24-494C-B071-300623221F4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D33076E-2F24-494C-B071-300623221F4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
