@@ -50,5 +50,12 @@ namespace HmsBackendTaskOne.API.Controllers
             return CreatedAtRoute("GetEmployeeById", new { id = productToReturn.Id },
                 productToReturn);
         }
+
+        [HttpDelete("{id:Guid}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _mediator.Send(new DeleteEmployeeCommand(id));
+            return Ok();
+        }
     }
 }
