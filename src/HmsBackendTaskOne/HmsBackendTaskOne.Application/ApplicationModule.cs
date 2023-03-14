@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using HmsBackendTaskOne.Application.DbContexts;
 
 namespace HmsBackendTaskOne.Application
 {
@@ -15,6 +16,16 @@ namespace HmsBackendTaskOne.Application
 
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<ApplicationDbContext>().AsSelf()
+                .WithParameter("connectionString", _connectionString)
+                .WithParameter("migrationAssemblyName", _migrationAssemblyName)
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<ApplicationDbContext>().As<IApplicationDbContext>()
+                .WithParameter("connectionString", _connectionString)
+                .WithParameter("migrationAssemblyName", _migrationAssemblyName)
+                .InstancePerLifetimeScope();
+
             base.Load(builder);
         }
     }

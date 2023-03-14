@@ -24,6 +24,5 @@ namespace HmsBackendTaskOne.Application.DbContexts
 
             base.OnConfiguring(optionsBuilder);
         }
-
     }
 }

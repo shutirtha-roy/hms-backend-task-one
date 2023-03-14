@@ -22,7 +22,8 @@ try
     var assemblyName = Assembly.GetExecutingAssembly().FullName;
 
     builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
-    builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder => {
+    builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
+    {
         containerBuilder.RegisterModule(new ApiModule());
         containerBuilder.RegisterModule(new ApplicationModule(connectionString,
             assemblyName));
