@@ -1,6 +1,6 @@
 ﻿namespace HmsBackendTaskOne.Domain.Entities
 {
-    public class Employee
+    public class Employee : IEntity<Guid>
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
