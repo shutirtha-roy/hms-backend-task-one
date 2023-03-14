@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HmsBackendTaskOne.Application.Commands;
 using HmsBackendTaskOne.Application.Queries;
+using HmsBackendTaskOne.Application.Services;
 using HmsBackendTaskOne.Domain.Entities;
 using HmsBackendTaskOne.Domain.IUnitOfWorks;
 using MediatR;
@@ -9,23 +10,18 @@ namespace HmsBackendTaskOne.Application.Handlers
 {
     public class UpdateEmployeeHandler : IRequestHandler<UpdateEmployeeCommand, Employee>
     {
-        private readonly IApplicationUnitOfWork _applicationUnitOfWork;
-        private readonly IMapper _mapper;
+        private readonly IEmployeeService _employeeService;
 
-        public UpdateEmployeeHandler(IApplicationUnitOfWork applicationUnitOfWork, IMapper mapper)
+        public UpdateEmployeeHandler(IEmployeeService employeeService)
         {
-            _applicationUnitOfWork = applicationUnitOfWork;
-            _mapper = mapper;
+            _employeeService = employeeService;
         }
 
         public async Task<Employee> Handle(UpdateEmployeeCommand request, CancellationToken cancellationToken)
         {
-            var employee = _applicationUnitOfWork.Employees.GetById(request.Employee.Id);
-            employee = _mapper.Map(request.Employee, employee);
+            var employee = await _employeeService.UpdateEmployee(request.Employee);
 
-            _applicationUnitOfWork.Save();
-
-            return request.Employee;
+            return employee;
         }
     }
 }

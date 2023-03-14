@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HmsBackendTaskOne.Application.Queries;
+using HmsBackendTaskOne.Application.Services;
 using HmsBackendTaskOne.Domain.Entities;
 using HmsBackendTaskOne.Domain.IUnitOfWorks;
 using MediatR;
@@ -8,16 +9,16 @@ namespace HmsBackendTaskOne.Application.Handlers
 {
     public class GetEmployeeHandler : IRequestHandler<GetEmployeesQuery, IList<Employee>>
     {
-        private readonly IApplicationUnitOfWork _applicationUnitOfWork;
+        private readonly IEmployeeService _employeeService;
 
-        public GetEmployeeHandler(IApplicationUnitOfWork applicationUnitOfWork)
+        public GetEmployeeHandler(IEmployeeService employeeService)
         {
-            _applicationUnitOfWork = applicationUnitOfWork;
+            _employeeService = employeeService;
         }
 
         public async Task<IList<Employee>> Handle(GetEmployeesQuery request, CancellationToken cancellationToken)
         {
-            var employee = _applicationUnitOfWork.Employees.GetAll();
+            var employee = await _employeeService.GetAllEmployees();
             return employee;
         } 
     }

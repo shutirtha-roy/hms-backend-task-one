@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using HmsBackendTaskOne.Application.DbContexts;
 using HmsBackendTaskOne.Application.Repositories;
+using HmsBackendTaskOne.Application.Services;
 using HmsBackendTaskOne.Application.UnitOfWorks;
 using HmsBackendTaskOne.Domain.IRepositories;
 using HmsBackendTaskOne.Domain.IUnitOfWorks;
@@ -28,6 +29,10 @@ namespace HmsBackendTaskOne.Application
             builder.RegisterType<ApplicationDbContext>().As<IApplicationDbContext>()
                 .WithParameter("connectionString", _connectionString)
                 .WithParameter("migrationAssemblyName", _migrationAssemblyName)
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<EmployeeService>()
+                .As<IEmployeeService>()
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<EmployeeRepository>()

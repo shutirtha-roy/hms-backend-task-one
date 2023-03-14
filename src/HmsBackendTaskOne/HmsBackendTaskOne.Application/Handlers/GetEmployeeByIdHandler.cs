@@ -1,4 +1,5 @@
 ﻿using HmsBackendTaskOne.Application.Queries;
+using HmsBackendTaskOne.Application.Services;
 using HmsBackendTaskOne.Domain.Entities;
 using HmsBackendTaskOne.Domain.IUnitOfWorks;
 using MediatR;
@@ -7,16 +8,16 @@ namespace HmsBackendTaskOne.Application.Handlers
 {
     public class GetEmployeeByIdHandler : IRequestHandler<GetEmployeeByIdQuery, Employee>
     {
-        private readonly IApplicationUnitOfWork _applicationUnitOfWork;
+        private readonly IEmployeeService _employeeService;
 
-        public GetEmployeeByIdHandler(IApplicationUnitOfWork applicationUnitOfWork)
+        public GetEmployeeByIdHandler(IEmployeeService employeeService)
         {
-            _applicationUnitOfWork = applicationUnitOfWork;
+            _employeeService = employeeService;
         }
 
         public async Task<Employee> Handle(GetEmployeeByIdQuery request, CancellationToken cancellationToken)
         {
-            var employee = _applicationUnitOfWork.Employees.GetById(request.Id);
+            var employee = await _employeeService.GetEmployeeById(request.Id);
             return employee;
         }
     }

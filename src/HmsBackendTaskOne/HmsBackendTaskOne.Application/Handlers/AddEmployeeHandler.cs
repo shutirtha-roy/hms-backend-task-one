@@ -1,24 +1,22 @@
 ﻿using HmsBackendTaskOne.Application.Commands;
-using HmsBackendTaskOne.Application.Queries;
+using HmsBackendTaskOne.Application.Services;
 using HmsBackendTaskOne.Domain.Entities;
-using HmsBackendTaskOne.Domain.IUnitOfWorks;
 using MediatR;
 
 namespace HmsBackendTaskOne.Application.Handlers
 {
     public class AddEmployeeHandler : IRequestHandler<AddEmployeeCommand, Employee>
     {
-        private readonly IApplicationUnitOfWork _applicationUnitOfWork;
+        private readonly IEmployeeService _employeeService;
 
-        public AddEmployeeHandler(IApplicationUnitOfWork applicationUnitOfWork)
+        public AddEmployeeHandler(IEmployeeService employeeService)
         {
-            _applicationUnitOfWork = applicationUnitOfWork;
+            _employeeService = employeeService;
         }
 
         public async Task<Employee> Handle(AddEmployeeCommand request, CancellationToken cancellationToken)
         {
-            _applicationUnitOfWork.Employees.Add(request.Employee);
-            _applicationUnitOfWork.Save();
+            await _employeeService.AddEmployee(request.Employee);
 
             return request.Employee;
         }
