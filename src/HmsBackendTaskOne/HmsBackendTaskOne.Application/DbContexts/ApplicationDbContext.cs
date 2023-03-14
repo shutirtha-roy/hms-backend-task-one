@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using HmsBackendTaskOne.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace HmsBackendTaskOne.Application.DbContexts
 {
@@ -24,5 +25,7 @@ namespace HmsBackendTaskOne.Application.DbContexts
 
             base.OnConfiguring(optionsBuilder);
         }
+
+        public DbSet<Employee> Employees { get; set; }
     }
 }
