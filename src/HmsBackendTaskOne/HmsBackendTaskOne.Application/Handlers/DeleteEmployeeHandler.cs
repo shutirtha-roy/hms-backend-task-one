@@ -1,12 +1,10 @@
 ﻿using HmsBackendTaskOne.Application.Commands;
 using HmsBackendTaskOne.Application.Services;
-using HmsBackendTaskOne.Domain.Entities;
-using HmsBackendTaskOne.Domain.IUnitOfWorks;
 using MediatR;
 
 namespace HmsBackendTaskOne.Application.Handlers
 {
-    public class DeleteEmployeeHandler : IRequestHandler<DeleteEmployeeCommand, Unit>
+    public class DeleteEmployeeHandler : IRequestHandler<DeleteEmployeeCommand>
     {
         private readonly IEmployeeService _employeeService;
 
@@ -15,11 +13,9 @@ namespace HmsBackendTaskOne.Application.Handlers
             _employeeService = employeeService;
         }
 
-        public async Task<Unit> Handle(DeleteEmployeeCommand request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteEmployeeCommand request, CancellationToken cancellationToken)
         {
             await _employeeService.DeleteEmployee(request.Id);
-
-            return Unit.Value;
         }
     }
 }

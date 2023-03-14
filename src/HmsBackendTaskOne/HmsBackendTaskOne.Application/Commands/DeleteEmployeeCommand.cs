@@ -3,5 +3,5 @@ using MediatR;
 
 namespace HmsBackendTaskOne.Application.Commands
 {
-    public record DeleteEmployeeCommand(Guid Id) : IRequest<Unit>;
+    public record DeleteEmployeeCommand(Guid Id) : IRequest;
 }

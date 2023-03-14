@@ -52,7 +52,7 @@ try
     builder.Services.AddScoped<IRequestHandler<GetEmployeeByIdQuery, Employee>, GetEmployeeByIdHandler>();
     builder.Services.AddScoped<IRequestHandler<AddEmployeeCommand, Employee>, AddEmployeeHandler>();
     builder.Services.AddScoped<IRequestHandler<UpdateEmployeeCommand, Employee>, UpdateEmployeeHandler>();
-    builder.Services.AddScoped<IRequestHandler<DeleteEmployeeCommand, Unit>, DeleteEmployeeHandler>();
+    builder.Services.AddScoped<IRequestHandler<DeleteEmployeeCommand>, DeleteEmployeeHandler>();
 
     builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
