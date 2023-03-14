@@ -9,7 +9,10 @@ namespace HmsBackendTaskOne.API.Controllers
     {
         private readonly IMediator _mediator;
 
-        public EmployeesController(IMediator mediator) => _mediator = mediator;
+        public EmployeesController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
 
         public IActionResult Index()
         {
