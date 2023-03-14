@@ -1,18 +1,20 @@
-using Autofac.Extensions.DependencyInjection;
 using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using HmsBackendTaskOne.API;
+using HmsBackendTaskOne.Application;
+using HmsBackendTaskOne.Application.Commands.AddEmployee;
+using HmsBackendTaskOne.Application.Commands.DeleteEmployee;
+using HmsBackendTaskOne.Application.Commands.UpdateEmployee;
+using HmsBackendTaskOne.Application.DbContexts;
+using HmsBackendTaskOne.Application.Handlers;
+using HmsBackendTaskOne.Application.Queries.GetAllEmployees;
+using HmsBackendTaskOne.Application.Queries.GetEmployeeById;
+using HmsBackendTaskOne.Domain.Entities;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
 using System.Reflection;
-using HmsBackendTaskOne.Application;
-using HmsBackendTaskOne.Application.DbContexts;
-using Autofac.Core;
-using MediatR;
-using HmsBackendTaskOne.Application.Queries;
-using HmsBackendTaskOne.Application.Handlers;
-using HmsBackendTaskOne.Domain.Entities;
-using HmsBackendTaskOne.Application.Commands;
 
 var builder = WebApplication.CreateBuilder(args);
 

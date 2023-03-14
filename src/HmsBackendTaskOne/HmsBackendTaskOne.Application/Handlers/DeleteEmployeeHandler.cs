@@ -1,4 +1,4 @@
-﻿using HmsBackendTaskOne.Application.Commands;
+﻿using HmsBackendTaskOne.Application.Commands.DeleteEmployee;
 using HmsBackendTaskOne.Application.Services;
 using MediatR;
 

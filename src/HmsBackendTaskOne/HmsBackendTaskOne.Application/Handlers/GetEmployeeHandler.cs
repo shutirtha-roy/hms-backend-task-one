@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using HmsBackendTaskOne.Application.Queries;
+using HmsBackendTaskOne.Application.Queries.GetAllEmployees;
 using HmsBackendTaskOne.Application.Services;
 using HmsBackendTaskOne.Domain.Entities;
 using HmsBackendTaskOne.Domain.IUnitOfWorks;

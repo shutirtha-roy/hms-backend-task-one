@@ -1,4 +1,4 @@
-﻿using HmsBackendTaskOne.Application.Queries;
+﻿using HmsBackendTaskOne.Application.Queries.GetEmployeeById;
 using HmsBackendTaskOne.Application.Services;
 using HmsBackendTaskOne.Domain.Entities;
 using HmsBackendTaskOne.Domain.IUnitOfWorks;
