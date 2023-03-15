@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HmsBackendTaskOne.Application.DTOs;
 using HmsBackendTaskOne.Domain.Entities;
 
 namespace HmsBackendTaskOne.Application.Profiles
@@ -8,6 +9,12 @@ namespace HmsBackendTaskOne.Application.Profiles
         public ApplicationProfile()
         {
             CreateMap<Employee, Employee>();
+
+            CreateMap<Employee, EmployeeCreateDTO>()
+                .ReverseMap();
+
+            CreateMap<Employee, EmployeeUpdateDTO>()
+                .ReverseMap();
         }
     }
 }

@@ -1,6 +1,9 @@
-﻿using HmsBackendTaskOne.Application.Commands.AddEmployee;
+﻿using Autofac;
+using AutoMapper;
+using HmsBackendTaskOne.Application.Commands.AddEmployee;
 using HmsBackendTaskOne.Application.Commands.DeleteEmployee;
 using HmsBackendTaskOne.Application.Commands.UpdateEmployee;
+using HmsBackendTaskOne.Application.DTOs;
 using HmsBackendTaskOne.Application.Queries.GetAllEmployees;
 using HmsBackendTaskOne.Application.Queries.GetEmployeeById;
 using HmsBackendTaskOne.Domain.Entities;
@@ -14,10 +17,14 @@ namespace HmsBackendTaskOne.API.Controllers
     public class EmployeesController : Controller
     {
         private readonly ISender _sender;
+        private readonly IMapper _mapper;
+        private readonly ILifetimeScope _scope;
 
-        public EmployeesController(ISender sender)
+        public EmployeesController(ISender sender, IMapper mapper, ILifetimeScope scope)
         {
             _sender = sender;
+            _mapper = mapper;
+            _scope = scope;
         }
 
         [HttpGet]
@@ -37,21 +44,29 @@ namespace HmsBackendTaskOne.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddEmployee([FromBody] Employee product)
+        public async Task<ActionResult> AddEmployee([FromBody] EmployeeCreateDTO employee)
         {
-            var productToReturn = await _sender.Send(new AddEmployeeCommand(product));
+            await employee.ResolveDependency(_scope);
 
-            return CreatedAtRoute("GetEmployeeById", new { id = productToReturn.Id },
-                productToReturn);
+            var employeeObj = await employee.GetEmployeeeObj();
+
+            var employeeToReturn = await _sender.Send(new AddEmployeeCommand(employeeObj));
+
+            return CreatedAtRoute("GetEmployeeById", new { id = employeeToReturn.Id },
+                employeeToReturn);
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdateEmployee([FromBody] Employee product)
+        public async Task<ActionResult> UpdateEmployee([FromBody] EmployeeUpdateDTO employee)
         {
-            var productToReturn = await _sender.Send(new UpdateEmployeeCommand(product));
+            await employee.ResolveDependency(_scope);
 
-            return CreatedAtRoute("GetEmployeeById", new { id = productToReturn.Id },
-                productToReturn);
+            var employeeObj = await employee.GetEmployeeUpdateObj();
+
+            var employeeToReturn = await _sender.Send(new UpdateEmployeeCommand(employeeObj));
+
+            return CreatedAtRoute("GetEmployeeById", new { id = employeeToReturn.Id },
+                employeeToReturn);
         }
 
         [HttpDelete("{id:Guid}")]
