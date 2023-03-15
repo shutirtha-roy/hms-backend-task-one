@@ -1,11 +1,14 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using HmsBackendTaskOne.API;
 using HmsBackendTaskOne.Application;
 using HmsBackendTaskOne.Application.Commands.AddEmployee;
 using HmsBackendTaskOne.Application.Commands.DeleteEmployee;
 using HmsBackendTaskOne.Application.Commands.UpdateEmployee;
 using HmsBackendTaskOne.Application.DbContexts;
+using HmsBackendTaskOne.Application.DTOs;
 using HmsBackendTaskOne.Application.Handlers;
 using HmsBackendTaskOne.Application.Queries.GetAllEmployees;
 using HmsBackendTaskOne.Application.Queries.GetEmployeeById;
@@ -58,7 +61,15 @@ try
 
     builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-    builder.Services.AddControllers();
+    builder.Services.AddControllers()
+    .AddFluentValidation(c =>
+    {
+        c.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+    });
+
+    builder.Services.AddTransient<IValidator<EmployeeCreateDTO>, EmployeeCreateDTOValidator>();
+    builder.Services.AddTransient<IValidator<EmployeeUpdateDTO>, EmployeeUpdateDTOValidator>();
+
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
