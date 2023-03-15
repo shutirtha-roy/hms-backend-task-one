@@ -53,10 +53,6 @@ try
         configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
     });
 
-    builder.Services.AddScoped<IRequestHandler<GetEmployeesQuery, IList<Employee>>, GetEmployeeHandler>();
-    builder.Services.AddScoped<IRequestHandler<GetEmployeeByIdQuery, Employee>, GetEmployeeByIdHandler>();
-    builder.Services.AddScoped<IRequestHandler<AddEmployeeCommand, Employee>, AddEmployeeHandler>();
-    builder.Services.AddScoped<IRequestHandler<UpdateEmployeeCommand, Employee>, UpdateEmployeeHandler>();
     builder.Services.AddScoped<IRequestHandler<DeleteEmployeeCommand>, DeleteEmployeeHandler>();
 
     builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

@@ -1,11 +1,10 @@
 ﻿using Autofac;
-using HmsBackendTaskOne.Application.Commands.UpdateEmployee;
+using HmsBackendTaskOne.Application.Codes;
+using HmsBackendTaskOne.Application.Commands.AddEmployee;
 using HmsBackendTaskOne.Application.DbContexts;
-using HmsBackendTaskOne.Application.Handlers;
 using HmsBackendTaskOne.Application.Repositories;
 using HmsBackendTaskOne.Application.Services;
 using HmsBackendTaskOne.Application.UnitOfWorks;
-using HmsBackendTaskOne.Domain.Entities;
 using HmsBackendTaskOne.Domain.IRepositories;
 using HmsBackendTaskOne.Domain.IUnitOfWorks;
 using MediatR;
@@ -46,6 +45,14 @@ namespace HmsBackendTaskOne.Application
             builder.RegisterType<ApplicationUnitOfWork>()
                 .As<IApplicationUnitOfWork>()
                 .InstancePerLifetimeScope();
+
+            var empl = typeof(AddEmployeeCommand);
+
+            builder.RegisterAssemblyTypes(EmployeeAssemblyTypes.Command)
+                .AsClosedTypesOf(typeof(IRequestHandler<,>));
+
+            builder.RegisterAssemblyTypes(EmployeeAssemblyTypes.Query)
+                .AsClosedTypesOf(typeof(IRequestHandler<,>));
 
             base.Load(builder);
         }
