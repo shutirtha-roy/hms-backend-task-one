@@ -6,13 +6,10 @@ using HmsBackendTaskOne.API;
 using HmsBackendTaskOne.Application;
 using HmsBackendTaskOne.Application.Commands.AddEmployee;
 using HmsBackendTaskOne.Application.Commands.DeleteEmployee;
-using HmsBackendTaskOne.Application.Commands.UpdateEmployee;
 using HmsBackendTaskOne.Application.DbContexts;
 using HmsBackendTaskOne.Application.DTOs;
 using HmsBackendTaskOne.Application.Handlers;
-using HmsBackendTaskOne.Application.Queries.GetAllEmployees;
 using HmsBackendTaskOne.Application.Queries.GetEmployeeById;
-using HmsBackendTaskOne.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -44,8 +41,6 @@ try
     builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.UseSqlServer(connectionString,
         m => m.MigrationsAssembly(assemblyName)));
-
-    //builder.Services.AddMediatR(conf => conf.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
     builder.Services.AddMediatR(configuration =>
     {
