@@ -46,8 +46,6 @@ namespace HmsBackendTaskOne.Application
                 .As<IApplicationUnitOfWork>()
                 .InstancePerLifetimeScope();
 
-            var empl = typeof(AddEmployeeCommand);
-
             builder.RegisterAssemblyTypes(EmployeeAssemblyTypes.Command)
                 .AsClosedTypesOf(typeof(IRequestHandler<,>));
 
