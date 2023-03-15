@@ -69,6 +69,9 @@ try
 
     builder.Services.AddTransient<IValidator<EmployeeCreateDTO>, EmployeeCreateDTOValidator>();
     builder.Services.AddTransient<IValidator<EmployeeUpdateDTO>, EmployeeUpdateDTOValidator>();
+    builder.Services.AddTransient<IValidator<AddEmployeeCommand>, AddEmployeeCommandValidator>();
+    builder.Services.AddTransient<IValidator<DeleteEmployeeCommand>, DeleteEmployeeCommandValidator>();
+    builder.Services.AddTransient<IValidator<GetEmployeeByIdQuery>, GetEmployeesByIdQueryValidator>();
 
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
