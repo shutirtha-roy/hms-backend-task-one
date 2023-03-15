@@ -17,13 +17,11 @@ namespace HmsBackendTaskOne.API.Controllers
     public class EmployeesController : Controller
     {
         private readonly ISender _sender;
-        private readonly IMapper _mapper;
         private readonly ILifetimeScope _scope;
 
-        public EmployeesController(ISender sender, IMapper mapper, ILifetimeScope scope)
+        public EmployeesController(ISender sender, ILifetimeScope scope)
         {
             _sender = sender;
-            _mapper = mapper;
             _scope = scope;
         }
 
