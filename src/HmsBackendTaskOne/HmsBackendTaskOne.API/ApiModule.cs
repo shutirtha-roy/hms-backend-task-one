@@ -11,9 +11,6 @@ namespace HmsBackendTaskOne.API
     {
         protected override void Load(ContainerBuilder builder)
         {
-            //builder.Services.AddScoped<IRequestHandler<GetEmployeesQuery, IList<Employee>>, GetEmployeeHandler>();
-            
-
             base.Load(builder);
         }
     }
